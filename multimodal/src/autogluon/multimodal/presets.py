@@ -747,6 +747,45 @@ def ner(presets: str = DEFAULT):
     return hyperparameters, hyperparameter_tune_kwargs
 
 
+@automm_presets.register()
+def qa(presets: str = DEFAULT):
+    """
+    Register the presets for qa.
+
+    Parameters
+    ----------
+    presets
+        The preset name.
+
+    Returns
+    -------
+    hyperparameters
+        The hyperparameters for a given preset.
+    hyperparameter_tune_kwargs
+        The hyperparameter tuning kwargs.
+    """
+    hyperparameters = {
+        "model.names": [
+            "ft_transformer",
+            "qa_text",
+        ],
+    }
+    hyperparameter_tune_kwargs = {}
+
+    presets, use_hpo = parse_presets_str(presets)
+    if use_hpo:
+        default_tunable_hyperparameters, default_hyperparameter_tune_kwargs = get_default_hpo_setup()
+        hyperparameters.update(default_tunable_hyperparameters)
+        hyperparameter_tune_kwargs.update(default_hyperparameter_tune_kwargs)
+
+    if presets == DEFAULT:
+        pass
+    else:
+        raise ValueError(f"Unknown preset type: {presets}")
+
+    return hyperparameters, hyperparameter_tune_kwargs
+
+
 def list_automm_presets(verbose: bool = False):
     """
     List all available presets.

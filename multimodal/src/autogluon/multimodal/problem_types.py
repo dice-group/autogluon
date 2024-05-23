@@ -31,6 +31,7 @@ from .constants import (
     NUMERICAL,
     OBJECT_DETECTION,
     OVERALL_F1,
+    QA,
     REGRESSION,
     RMSE,
     ROC_AUC,
@@ -284,5 +285,16 @@ PROBLEM_TYPES_REG.register(
         _supported_evaluation_metrics=METRICS[MULTICLASS].keys(),
         _fallback_evaluation_metric=ACCURACY,
         _fallback_validation_metric=ACCURACY,
+    ),
+)
+
+PROBLEM_TYPES_REG.register(
+    QA,
+    ProblemTypeProperty(
+        name=QA,
+        supported_modality_type={TEXT},
+        supported_label_type={TEXT},
+        _supported_evaluation_metrics=[NER_TOKEN_F1],  # TODO gerbil
+        _fallback_validation_metric=NER_TOKEN_F1,
     ),
 )

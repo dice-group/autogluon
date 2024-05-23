@@ -37,6 +37,7 @@ from ..constants import (
     TEXT_NER,
     TIMM_IMAGE,
     XYXY,
+    TEXT_QA,
 )
 from ..data import MultiModalFeaturePreprocessor
 from ..models import (
@@ -107,6 +108,8 @@ def select_model(
         data_status[DOCUMENT] = True
     if len(df_preprocessor.semantic_segmentation_feature_names) > 0:
         data_status[SEMANTIC_SEGMENTATION_IMG] = True
+    if len(df_preprocessor.qa_feature_names) > 0:
+        data_status[TEXT_QA] = True
 
     names = config.model.names
     if isinstance(names, str):

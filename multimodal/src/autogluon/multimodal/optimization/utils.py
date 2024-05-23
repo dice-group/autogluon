@@ -62,6 +62,7 @@ from ..constants import (
     PAIR_MARGIN_MINER,
     PEARSONR,
     PEFT_STRATEGIES,
+    QA,
     QUADRATIC_KAPPA,
     R2,
     RECALL,
@@ -130,7 +131,7 @@ def get_loss_func(
                 loss_func = nn.MSELoss()
         else:
             loss_func = nn.MSELoss()
-    elif problem_type == NER:
+    elif problem_type == NER or problem_type == QA:
         loss_func = nn.CrossEntropyLoss(ignore_index=0)
     elif problem_type in [OBJECT_DETECTION, FEW_SHOT_CLASSIFICATION]:
         return None

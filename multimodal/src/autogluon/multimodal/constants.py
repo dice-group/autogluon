@@ -6,6 +6,7 @@ NULL = "null"
 CATEGORICAL = "categorical"
 TEXT = "text"
 TEXT_NER = "text_ner"  # Added for NER text column
+TEXT_QA = "text_qa"
 NUMERICAL = "numerical"
 IMAGE_PATH = "image_path"
 IMAGE_BYTEARRAY = "image_bytearray"
@@ -38,6 +39,7 @@ TEXT_SIMILARITY = "text_similarity"
 IMAGE_TEXT_SIMILARITY = "image_text_similarity"
 FEW_SHOT_CLASSIFICATION = "few_shot_classification"
 SEMANTIC_SEGMENTATION = "semantic_segmentation"
+QA = "qa"
 
 # Input keys
 IMAGE = "image"
@@ -189,7 +191,7 @@ MMDET = "mmdet"
 MMOCR = "mmocr"
 
 # Modality keys. may need to update here if new modality keys are added in above.
-ALL_MODALITIES = [IMAGE, TEXT, CATEGORICAL, NUMERICAL, TEXT_NER, DOCUMENT, SEMANTIC_SEGMENTATION_IMG]
+ALL_MODALITIES = [IMAGE, TEXT, CATEGORICAL, NUMERICAL, TEXT_NER, DOCUMENT, SEMANTIC_SEGMENTATION_IMG, TEXT_QA]
 
 # Keys to compute metrics
 Y_PRED = "y_pred"

@@ -34,6 +34,7 @@ from ..constants import (
     SEMANTIC_SEGMENTATION_IMG,
     TEXT,
     TEXT_NER,
+    TEXT_QA,
 )
 from .label_encoder import CustomLabelEncoder
 
@@ -143,6 +144,7 @@ class MultiModalFeaturePreprocessor(TransformerMixin, BaseEstimator):
         self._ner_feature_names = []
         self._document_feature_names = []
         self._semantic_segmentation_feature_names = []
+        self._qa_feature_names = []
 
     @property
     def label_column(self):
@@ -211,6 +213,14 @@ class MultiModalFeaturePreprocessor(TransformerMixin, BaseEstimator):
         # Added for backward compatibility.
         if hasattr(self, "_semantic_segmentation_feature_names"):
             return self._semantic_segmentation_feature_names
+        else:
+            return []
+
+    @property
+    def qa_feature_names(self):
+        # Added for backward compatibility for v0.6.0 where column_type is not specified.
+        if hasattr(self, "_qa_feature_names"):
+            return self._qa_feature_names
         else:
             return []
 
@@ -318,7 +328,10 @@ class MultiModalFeaturePreprocessor(TransformerMixin, BaseEstimator):
                 self._ignore_columns_set.add(col_name)
             elif col_type.startswith(TEXT_NER):
                 self._ner_feature_names.append(col_name)
+            elif col_type.startswith(TEXT_QA):
+                self._qa_feature_names.append(col_name)
             elif col_type.startswith(TEXT):
+                # This needs to be after the check for TEXT_NER and TEXT_QA due to the same prefix.
                 self._text_feature_names.append(col_name)
             elif col_type == CATEGORICAL:
                 if self._config.categorical.convert_to_text:

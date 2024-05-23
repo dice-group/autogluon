@@ -36,6 +36,7 @@ from ..constants import (
     SEMANTIC_SEGMENTATION_IMG,
     TEXT,
     TEXT_NER,
+    QA,
 )
 from .utils import is_rois_input
 
@@ -772,7 +773,7 @@ def infer_output_shape(
             return 1
         else:
             return class_num
-    elif problem_type in [NER, OBJECT_DETECTION, SEMANTIC_SEGMENTATION]:
+    elif problem_type in [NER, OBJECT_DETECTION, SEMANTIC_SEGMENTATION, QA]:
         return None
     else:
         raise ValueError(
@@ -781,7 +782,8 @@ def infer_output_shape(
             f" '{BINARY}', '{MULTICLASS}', '{REGRESSION}',"
             f" '{CLASSIFICATION}', '{NER}',"
             f" '{OBJECT_DETECTION}', "
-            f" '{SEMANTIC_SEGMENTATION}"
+            f" '{SEMANTIC_SEGMENTATION}', "
+            f" '{QA}'"
         )
 
 
